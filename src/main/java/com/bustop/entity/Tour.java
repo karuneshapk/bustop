@@ -55,12 +55,15 @@ public class Tour {
 		boolean doesThisTourStartLaterAndReachAtTheSameTime = this.departureTime.isAfter(departureTime)
 			&& this.arriveTime.equals(arriveTime);
 
+		boolean doesThisTourStartLaterAndReachEarlier = this.departureTime.isAfter(departureTime)
+			&& this.arriveTime.isBefore(arriveTime);
+
 		boolean doesThisTourIsBetterByType = this.departureTime.equals(departureTime)
 			&& this.arriveTime.equals(arriveTime)
 			&& POSH.equals(this.companyType)
 			&& GROTTY.equals(companyType);
 
-		if (doesThisTourStartAtTheSameTimeAndReachEarlier || doesThisTourStartLaterAndReachAtTheSameTime || doesThisTourIsBetterByType) {
+		if (doesThisTourStartAtTheSameTimeAndReachEarlier || doesThisTourStartLaterAndReachAtTheSameTime || doesThisTourIsBetterByType || doesThisTourStartLaterAndReachEarlier) {
 			return EFFICIENT;
 		}
 

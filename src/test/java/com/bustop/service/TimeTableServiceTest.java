@@ -70,4 +70,17 @@ public class TimeTableServiceTest {
 		assertThat(efficientTours, hasSize(1));
 		assertThat(efficientTours.get(0), is("GROTTY 10:10 11:00\n"));
 	}
+
+
+	@Test
+	public void createEfficientTour_WhenOneContainsAnotherTour() {
+		when(converterService.toTour(any())).thenCallRealMethod();
+
+		List<String> lines = asList("Posh 10:10 10:50", "Posh 15:00 15:10", "Posh 10:30 10:40");
+
+		List<String> efficientTours = timeTableService.createEfficientTours(lines);
+		assertThat(efficientTours, hasSize(2));
+		assertThat(efficientTours.get(0), is("POSH 10:30 10:40\n"));
+		assertThat(efficientTours.get(1), is("POSH 15:00 15:10\n"));
+	}
 }
